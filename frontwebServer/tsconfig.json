@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM","WebWorker"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["node","element-plus/global","vite/client", "vue", "plugin-resolver"],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@":["src"],
+      "@/*":["src/*"],
+      "@st":["src/store"],
+      "@st/*":["src/store/*"],
+      "@app":["src/plugins/app"],
+      "@app/*":["src/plugins/app/*"],
+      "@libs":["src/plugins/libs"],
+      "@libs/*":["src/plugins/libs/*"],
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

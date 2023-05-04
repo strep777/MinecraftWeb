@@ -1,0 +1,64 @@
+.el-dropdown{
+    outline: none;
+    border: none;
+    &:focus{
+        outline: none;
+        border: none;
+    }
+    &:hover{
+        outline: none;
+        border: none;
+    }
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner{
+    background-color: rgba($color: #eea056, $alpha: 1.0) !important;
+    border-color: #c78938 !important;
+}
+.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color: rgba($color: #eea056, $alpha: 1.0) !important;
+    border-color: #c78938 !important;
+}
+.el-checkbox__label{
+    color: #000 !important;
+}
+.el-select{ 
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important; 
+    --el-select-input-focus-border-color:transparent !important;
+    height: 100% !important;
+}
+.el-input__wrapper{ 
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important; 
+}
+.el-input__inner{
+    box-shadow: none !important;
+    border: none !important; 
+    height: 100% !important;
+}
+.select-trigger{
+    display: flex;
+    align-self: center;
+}
+.el-tooltip__trigger{
+    height: 100% !important;
+}
+.el-select-dropdown__item{
+    max-width: 95vw !important;
+}
+.el-date-editor--daterange{
+    border:1px solid #eee !important;
+    padding: 5px 10px !important;
+    font-size: 1rem !important;
+    border-radius: 5px !important;
+    box-shadow: 0 0 2px 0 rgba($color: #000000, $alpha: 0.1) !important;
+    &>.el-range-separator{
+        padding: 10px !important;
+    }
+    &:focus-within{  
+        border: 1px solid #eea056 !important;
+    }
+}

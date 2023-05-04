@@ -1,0 +1,248 @@
+//ts
+npm add vue-router@next dayjs js-base64 axios uuid nanoid vue-monoplasty-slide-verify animate.css remixicon mitt element-plus
+npm add unplugin-vue-components unplugin-auto-import vite-plugin-compression ant-design-vue element-plus @ant-design/icons-vue
+npm add node-sass sass-loader style-loader pinyin-match @zxing/library sass echarts @types/node path  vite-plugin-inspect js-cookies
+npm add seedrandom crypto-random vite vue-router@4 @types/vue-router highlight.js dotenv naive-ui html2canvas pinia
+npm add graphql graphql-tag graphql-request @types/uuid
+
+//vite.config
+import path from 'path'
+import type { PluginOption } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { VitePWA } from 'vite-plugin-pwa'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+import path from 'path'
+import type { PluginOption } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { VitePWA } from 'vite-plugin-pwa'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default defineConfig(({ mode, command }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const { VITE_API_URL } = env;
+  return {
+    define: {
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(process.cwd(), 'src'),
+        '@gc': path.resolve(process.cwd(), 'src/components/common'),
+        '@st': path.resolve(process.cwd(), 'src/store'),
+        '@app':path.resolve(process.cwd(),'src/plugins/app'),
+        '@libs':path.resolve(process.cwd(),'src/plugins/libs'),
+      },
+    },
+    plugins:[
+      vue({reactivityTransform: true,}),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
+    server: {
+      host: '0.0.0.0',
+      port: 8080,
+      open: false,
+    },
+    build: {
+      reportCompressedSize: false,
+      sourcemap: false,
+      commonjsOptions: {
+        ignoreTryCatch: false,
+      },
+    },
+  }
+})
+
+//vite.config.js
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM","WebWorker"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["node","element-plus/global","vite/client", "vue", "plugin-resolver"],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@":["src"],
+      "@/*":["src/*"],
+      "@st":["src/store"],
+      "@st/*":["src/store/*"],
+      "@app":["src/plugins/app"],
+      "@app/*":["src/plugins/app/*"],
+      "@libs":["src/plugins/libs"],
+      "@libs/*":["src/plugins/libs/*"],
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+//tsconfig.json
+
+import { createApp,h,nextTick,onMounted,toRefs,watch,watchEffect } from 'vue'
+import {useStore,createStore,mapActions,mapState,mapGetters,mapMutations} from 'vuex'
+import axios from "axios";
+import mitt from 'mitt'
+
+import App from './App.vue'
+import ExamHeader from './components/common/exam_header.vue'
+import ExamSider from './components/common/exam_sider.vue'
+import ExamDraw from './components/common/exam_draw.vue'
+import ExamCard from './components/common/exam_card.vue'
+
+import 'remixicon/fonts/remixicon.css'
+import 'animate.css'
+import {router} from './router/web.ts'
+
+import {createPinia} from 'pinia'
+
+import * as ElementUI from 'element-plus';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import 'element-plus/dist/index.css';
+
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+const app = createApp({
+    render(){return h(App)},
+})
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
+const emitter: any = mitt();
+
+// window.addEventListener('beforeunload', () => {
+//     let user = store.getters.getUser;
+//     if (user) {
+//         localStorage.setItem('user', JSON.stringify(user));
+//     }
+// });
+
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
+app.provide('bus',emitter)
+app.provide('server',import.meta.env.VITE_API_URL)//import.meta.env.VITE_APP_API_URL
+//通用插件
+app.use(ElementUI);
+app.use(router);
+app.use(pinia);
+// 库组件
+//自定义组件
+app.component('ExamHeader',ExamHeader);
+app.component('ExamSider',ExamSider);
+app.component('ExamDraw',ExamDraw);
+app.component('ExamCard',ExamCard);
+
+app.mount('#app');
+
+//main.ts
+
+
+<template>
+  <div class="main-app">
+    <ExamHeader v-if="header_show"></ExamHeader>
+    <ExamSider v-if="sider_show"></ExamSider>
+    <router-view /> 
+  </div>
+</template>
+
+<script setup lang="ts" name="App">
+  import { onMounted,onUpdated, onBeforeMount,onBeforeUnmount,onUnmounted,onServerPrefetch, Ref} from 'vue';
+  import { ref,reactive,readonly} from 'vue';
+  import { computed,watch,watchEffect,inject,provide} from 'vue';
+  import {getCurrentInstance,defineComponent} from 'vue';
+   import useStore from '@st/store';
+  import {useRoute, RouteLocationNormalizedLoaded} from 'vue-router';
+  // 导入 dayjs 库
+  import dayjs from 'dayjs'
+  // 导入 dayjs 的时区插件
+  import utc from 'dayjs/plugin/utc'
+  // 导入 dayjs 的时区解析插件
+  import timezone from 'dayjs/plugin/timezone'
+  import 'dayjs/locale/zh-cn' // 导入本地化语言
+
+  // 引入时区数据
+  import 'dayjs/locale/zh-cn'
+  import 'dayjs/locale/en'
+import axios from 'axios';
+
+
+const store = useStore()
+const route:RouteLocationNormalizedLoaded = useRoute()
+  let header_show:Ref<boolean> = ref(true);
+  let sider_show:Ref<boolean> = ref(true);
+  const window_width:Ref<number> = ref(0);
+  const window_height:Ref<number> = ref(0);
+  
+  dayjs.locale('zh-cn') // 使用本地化语言
+
+  const getWindowSize = () =>{
+    window_width.value = window.innerWidth;
+    window_height.value = window.innerHeight;
+  }
+
+  onBeforeMount(()=>{
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
+
+    // 设置默认语言为中文
+    dayjs.locale('zh-cn')
+
+    // 将时区设置为 "Asia/Shanghai"
+    dayjs.tz.setDefault('Asia/Shanghai')
+  })
+  onMounted(() => {
+    getWindowSize();
+    window.addEventListener('resize', getWindowSize);
+  });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', getWindowSize);
+  });
+
+  watchEffect(() => {
+    //显示侧边操作栏
+    if (route.path === '/login'||window_width.value<600) {
+      sider_show.value = false;
+
+    }else{
+      sider_show.value = true;
+
+    }
+  });
+
+
+
+</script>
+
+<style lang="scss">
+  @import "./src/assets/scss/main.scss";
+  
+  .main-app{
+    height: 100%;
+  }
+  .content{
+    display: grid;
+  }
+</style>
+
+//Appp.vue

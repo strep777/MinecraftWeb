@@ -1,0 +1,49 @@
+@import '../mixin/components/button.scss';
+$shadow_color:#eea056;
+
+
+.button{
+    @include button;
+}
+.button::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+//animation
+.button::after{
+    opacity: 0;
+    box-shadow: 0 0 0 4px $shadow_color;
+    transition: .3s;
+}
+.button:active::after{
+    box-shadow: none;
+    opacity: 1;
+    transition: 0s;
+}
+
+
+
+.button-border{
+    @include button-border;
+}
+.button-border::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+//animation
+.button-border::after{
+    opacity: 0;
+    box-shadow: 0 0 0 6px $shadow_color;
+    transition: .3s;
+}
+.button-border:active::after{
+    box-shadow: none;
+    opacity: 1;
+    transition: 0s;
+}

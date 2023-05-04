@@ -1,0 +1,18 @@
+@import '../mixin/components/select.scss';
+
+
+.select{
+    @include select;
+}
+.select-frame{
+    @include select-frame;
+    &:focus-within{  
+        border: 1px solid #eea056 !important;
+    }
+}
+.select-after{
+    @include select-after;
+}
+.select-before{
+    @include select-before;
+}

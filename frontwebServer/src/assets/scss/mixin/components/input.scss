@@ -1,0 +1,76 @@
+$default_color:#eee;
+$main_color:#ee8320;
+$minor_color:#c78938;
+@mixin textarea{
+    border: none;
+    outline: none;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 100%;
+}
+@mixin input{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    justify-self: center;
+    padding: 10px;
+    letter-spacing: 1px;
+    transition: .1s;
+}
+@mixin input-frame{
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 2px 0 rgba($color: #000000, $alpha: 0.1);
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    transition: .1s;
+    &:focus-within > .input-before{
+        color: #eea056;
+    }
+}
+@mixin input-after{
+    display: grid;
+    padding: 10px;
+    transition: .1s;
+    justify-self: center;
+    flex-shrink: 0;
+}
+@mixin input-before{
+    display: grid;
+    padding: 10px;
+    transition: .1s;
+    justify-self: center;
+    flex-shrink: 0;
+}
+@mixin input-upload-frame{
+    border: 2px dashed #ddd;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover{
+        border-color: #ee8320;
+        & i::before{
+            color: #ee8320;
+        }
+    }
+}
+
+@mixin input-upload{
+    display: none;
+}
+
+@mixin input-upload-label{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    &>i::before{
+        color: #ddd;
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,88 @@
+npm install vue-router@next
+npm install vuex
+npm install dayjs
+npm install js-base64
+npm install axios
+npm install uuid
+npm install nanoid //uuid简化
+npm install pinyin-match //拼音
+npm i element-ui -S//element-UI
+npm install animate.css --save //动画库
+npm install remixicon --save //remix开源图标库
+npm install mitt //VUE3全局事件总线
+npm i @zxing/library --save//摄像头
+
+//vite 
+//js
+npm install vue-router@next vuex dayjs js-base64 axios uuid nanoid vue-monoplasty-slide-verify animate.css remixicon mitt element-ui 
+npm install unplugin-vue-components unplugin-auto-import vite-plugin-compression ant-design-vue element-plus @ant-design/icons-vue
+npm install node-sass sass-loader style-loader pinyin-match @zxing/library sass echarts @types/node path  vite-plugin-inspect js-cookies
+npm install seedrandom crypto-random vite vue-router@4 @types/vue-router highlight.js dotenv graphql
+
+//ts
+npm add vue-router@next vuex dayjs js-base64 axios uuid nanoid vue-monoplasty-slide-verify animate.css remixicon mitt element-plus
+npm add unplugin-vue-components unplugin-auto-import vite-plugin-compression ant-design-vue element-plus @ant-design/icons-vue
+npm add node-sass sass-loader style-loader pinyin-match @zxing/library sass echarts @types/node path  vite-plugin-inspect js-cookies
+npm add seedrandom crypto-random vite vue-router@4 @types/vue-router highlight.js dotenv naive-ui html2canvas pinia
+npm add graphql apollo graphql-tag @apollo/client graphql-request @apollo/federation @vue/apollo-option pinia-plugin-persistedstate
+
+//vue.config.js
+module.exports = {
+  lintOnSave:false,
+  publicPath:'./',
+  devServer:{
+      port:8080, // 启动代理服务器端口
+      open:false,  // 启动后是否自动打开网页
+      proxy: {
+        '/api': {
+          target: `${this.$server}`, //要跨域的域名
+          secure:true ,//接受对方是https的接口
+          ws: true, // 是否启用websockets
+          changeOrigin: true, //是否允许跨越
+          pathRewrite: {
+            //'^/api': '/'  //删除请求到后台的url中的api
+          },
+        }
+      }
+  },
+}
+//main.js
+import { createApp,h,nextTick } from 'vue'
+import App from './App.vue'
+import mitt from 'mitt'
+
+import 'remixicon/fonts/remixicon.css'
+import 'animate.css'
+import {router} from './router/web.js'
+import SlideVerify from 'vue-monoplasty-slide-verify'
+
+import uuid from './plugins/common_plugins/uuid_plugin.js'
+import base64 from './plugins/common_plugins/base64_plugin.js'
+import cookies from './plugins/common_plugins/cookie_plugin.js'
+import date from './plugins/common_plugins/date_plugin.js'
+import file from './plugins/common_plugins/file_plugin.js'
+import common from './plugins/common_plugins/common_plugin.js'
+
+import axios from "axios";
+
+createApp.productiontip = false //取消刚渲染时的提示
+
+const app = createApp({
+    render(){return h(App)},
+    created(){
+        app.config.globalProperties.$bus = new mitt(); //将全局事件总线绑定到$bus
+        app.config.globalProperties.$server = 'https://localhost';
+    },
+    mounted() {
+    },
+
+})
+
+app.use(uuid);
+app.use(base64);
+app.use(cookies);
+app.use(date);
+app.use(file);
+app.use(common);
+app.use(router);
+app.mount('#app');

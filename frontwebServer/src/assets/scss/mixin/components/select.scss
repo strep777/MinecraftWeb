@@ -1,0 +1,40 @@
+$default_color:#eee;
+$main_color:#ee8320;
+$minor_color:#c78938;
+@mixin select{
+    width: 100%;
+    border: none;
+    outline: none;
+    justify-self: center;
+    padding: 10px;
+    letter-spacing: 1px;
+    transition: .1s;
+}
+@mixin select-frame{
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 2px 0 rgba($color: #000000, $alpha: 0.1);
+    border-radius: 5px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    transition: .1s;
+    &:focus-within > .input-before{
+        color: #eea056;
+    }
+}
+@mixin select-after{
+    display: grid;
+    padding: 10px;
+    transition: .1s;
+    justify-self: center;
+    flex-shrink: 0;
+    padding: 15px;
+}
+@mixin select-before{
+    display: grid;
+    padding: 10px;
+    transition: .1s;
+    justify-self: center;
+    flex-shrink: 0;
+    padding: 15px;
+}

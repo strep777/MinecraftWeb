@@ -1,0 +1,9 @@
+//course operation
+.course-admin-filter{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    &>*:not(:last-child){
+        margin: 0 10px;
+    }
+}

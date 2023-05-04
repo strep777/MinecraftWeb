@@ -1,0 +1,42 @@
+$main_color:#ee8320;
+$minor_color:#c78938;
+
+@mixin button{
+    padding: 1vh 2vh;
+    text-decoration: none;
+    display: grid;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: $main_color;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    transition: background-color 0.3s ease;
+    &:hover{
+        background-color: $minor_color;
+    }
+}
+
+@mixin button-border{
+    padding: 1vh 2vh;
+    background-color: transparent;
+    border: 1px solid $main_color;
+    display: grid;
+    cursor: pointer;
+    color: $main_color;//线框按钮字体默认和框同色
+    border-radius: 5px;
+    outline: none;
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    transition: background-color 0.3s ease;
+    transition: color 0.3s ease;
+    &:hover{
+        border: 1px solid $minor_color;
+        background-color: $main_color;
+        color: #fff;
+    }
+}

@@ -1,0 +1,32 @@
+@import '../mixin/components/input.scss';
+
+.textarea{
+    @include textarea;
+}
+
+.input{
+    @include input;
+}
+.input-frame{
+    @include input-frame;
+    &:focus-within{  
+        border: 1px solid #eea056 !important;
+    }
+}
+.input-after{
+    @include input-after;
+}
+.input-before{
+    @include input-before;
+}
+
+.input-upload-frame{
+    @include input-upload-frame;
+}
+.input-upload{
+    @include input-upload;
+}
+
+.input-upload-label{
+    @include input-upload-label;
+}
