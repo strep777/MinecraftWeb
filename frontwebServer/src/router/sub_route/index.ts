@@ -1,4 +1,4 @@
-import index from "@/components/common/template.vue";
+import index from "@/components/index.vue";
 export const index_routes = {
     index:{
         path: "/index",
@@ -6,5 +6,17 @@ export const index_routes = {
         component: index,
         meta: { requiresAuth: true }
     },
+    home:{
+        path: "/",
+        name: "home",
+        component: index,
+        meta: { requiresAuth: true }
+    },
+    dashboard:{
+        path: "/",
+        name: "dashboard",
+        component: index,
+        meta: { requiresAuth: true }
+    }
 }
 

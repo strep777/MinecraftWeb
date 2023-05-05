@@ -48,16 +48,6 @@
     margin: 0 auto;
     position: relative;
   }
-  .layout{
-    position: relative;
-    left: 250px; /* 左侧间距等于sidebar宽度 */
-    top: 80px;
-    width: calc(100% - 250px); /* 占满剩余宽度 */
-    height: calc(100% - 80px); /* 设置高度以测试效果 */
-  }
-  .layout-frame{
-    padding:30px;
-  }
   .height-100{
     height: 100%;
   }

@@ -1,9 +1,11 @@
 //ts
-npm add vue-router@next dayjs js-base64 axios uuid nanoid vue-monoplasty-slide-verify animate.css remixicon mitt element-plus
-npm add unplugin-vue-components unplugin-auto-import vite-plugin-compression ant-design-vue element-plus @ant-design/icons-vue
+npm add vue-router@next dayjs js-base64 axios uuid nanoid vue-monoplasty-slide-verify animate.css remixicon mitt
+npm add unplugin-vue-components unplugin-auto-import vite-plugin-compression ant-design-vue @ant-design/icons-vue
 npm add node-sass sass-loader style-loader pinyin-match @zxing/library sass echarts @types/node path  vite-plugin-inspect js-cookies
-npm add seedrandom crypto-random vite vue-router@4 @types/vue-router highlight.js dotenv naive-ui html2canvas pinia
-npm add graphql graphql-tag graphql-request @types/uuid
+npm add seedrandom crypto-random vue-router@4 @types/vue-router highlight.js dotenv naive-ui html2canvas pinia
+npm add graphql graphql-tag graphql-request @types/uuid @vitejs/plugin-vue vite unplugin-vue-components
+npm add unplugin-vue-components/resolvers unplugin-vue-components/vite
+npm install --save-dev unplugin-vue-components
 
 //vite.config
 import path from 'path'
@@ -78,7 +80,7 @@ export default defineConfig(({ mode, command }) => {
     "lib": ["ESNext", "DOM","WebWorker"],
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["node","element-plus/global","vite/client", "vue", "plugin-resolver"],
+    "types": ["node","vite/client", "vue", "plugin-resolver"],
     "typeRoots": ["./node_modules/@types", "./types"],
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
@@ -114,10 +116,6 @@ import 'animate.css'
 import {router} from './router/web.ts'
 
 import {createPinia} from 'pinia'
-
-import * as ElementUI from 'element-plus';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import 'element-plus/dist/index.css';
 
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const app = createApp({

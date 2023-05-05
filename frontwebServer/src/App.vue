@@ -1,6 +1,11 @@
 <template>
   <div class="main-app">
-    <router-view /> 
+    <div class="mc-header">
+      <Header></Header>
+    </div>
+    <div class="mc-main">
+      <router-view /> 
+    </div>
   </div>
 </template>
 
@@ -9,7 +14,7 @@ import { onMounted,onUpdated, onBeforeMount,onBeforeUnmount,onUnmounted,onServer
 import { ref,reactive,readonly} from 'vue';
 import { computed,watch,watchEffect,inject,provide} from 'vue';
 import {getCurrentInstance,defineComponent} from 'vue';
-  import useStore from '@st/store';
+import useStore from '@st/store';
 import {useRoute, RouteLocationNormalizedLoaded} from 'vue-router';
 // 导入 dayjs 库
 import dayjs from 'dayjs'
@@ -22,8 +27,6 @@ import 'dayjs/locale/zh-cn' // 导入本地化语言
 // 引入时区数据
 import 'dayjs/locale/zh-cn'
 import 'dayjs/locale/en'
-import axios from 'axios';
-
 
 const store = useStore()
 const route:RouteLocationNormalizedLoaded = useRoute()
@@ -76,8 +79,5 @@ watchEffect(() => {
   
   .main-app{
     height: 100%;
-  }
-  .content{
-    display: grid;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div class="templateinit layout">
-        <div class="templateinit-frame layout-frame">
+    <div class="minecraft-filemanager">
+        <div class="minecraft-filemanager-frame">
             
         </div>
     </div>
@@ -18,9 +18,9 @@ import {useRouter,Router} from 'vue-router';
 import useStore from '@st/store';
 import {storeToRefs} from 'pinia'
 import { request, GraphQLClient,gql } from 'graphql-request'
-import { ElMessage } from 'element-plus'
+
 import * as echarts from 'echarts';
-const {auth,course_database,alert} = useStore()
+const {alert} = useStore()
 const router:Router = useRouter()
 const server:string | undefined = inject('server');
 </script>

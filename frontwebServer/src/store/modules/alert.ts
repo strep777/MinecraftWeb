@@ -1,32 +1,41 @@
 import { defineStore } from "pinia";
 import { Ref, computed } from "vue";
 import { ref } from "vue";
-import { ElMessage } from 'element-plus'
-import { EpPropMergeType } from "element-plus/es/utils";
-
-export interface Alert {
-    showClose?: boolean,
-    message:string,
-    type:EpPropMergeType<StringConstructor, "success" | "warning" | "error" | "info", unknown> | undefined,
-}
+import { MessageType, useMessage } from 'naive-ui'
 
 export default defineStore("alert_option",()=>{
     let alert_msg:Ref<Alert> = ref({
-        showClose: false,
+        closable: false,
+        keepAliveOnHover:true,
+        duration:2000,
         message:'',
-        type:'error' as EpPropMergeType<StringConstructor, "success" | "warning" | "error" | "info", unknown>,
+        type:'default',
     })
+
+//   'success',
+//   'info',
+//   'warning',
+//   'error',
+//   'loading'
+//   'loading'
 
     //getter=computed
     let get_alert = computed(()=>alert_msg.value)
 
 
-    async function alert_action(args:Alert):Promise<void>{
-        ElMessage({
-            showClose: args.showClose,
-            message:args.message,
-            type:args.type,
-        })
+    const alert_action = async (args:Alert):Promise<void>=>{
+        const message = useMessage()
+
+        message.create(
+            args.message,
+            {
+                keepAliveOnHover: args.keepAliveOnHover,
+                closable: args.closable,
+                duration: args.duration,
+                type: args.type as MessageType,
+            }
+        )
+       
     }
 
     return {

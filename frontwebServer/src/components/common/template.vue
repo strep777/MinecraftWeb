@@ -18,7 +18,6 @@ import {useRouter,Router} from 'vue-router';
 import useStore from '@st/store';
 import {storeToRefs} from 'pinia'
 import { request, GraphQLClient,gql } from 'graphql-request'
-import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts';
 const {alert} = useStore()
 const router:Router = useRouter()

@@ -1,5 +1,7 @@
 interface Alert {
-    showClose?: boolean,
+    closable?: boolean,
+    keepAliveOnHover?:boolean,
+    duration?: number,
     message:string,
-    type:EpPropMergeType<StringConstructor, "success" | "warning" | "error" | "info", unknown> | undefined,
+    type: string,
 }

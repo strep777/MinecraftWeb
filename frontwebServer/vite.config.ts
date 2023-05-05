@@ -1,11 +1,10 @@
 import path from 'path'
-import type { PluginOption } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -25,10 +24,20 @@ export default defineConfig(({ mode, command }) => {
     plugins:[
       vue({reactivityTransform: true,}),
       AutoImport({
-        resolvers: [ElementPlusResolver()],
+        imports: [
+          'vue',
+          {
+            'naive-ui': [
+              'useDialog',
+              'useMessage',
+              'useNotification',
+              'useLoadingBar'
+            ]
+          }
+        ]
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [NaiveUiResolver()]
       }),
     ],
     server: {
