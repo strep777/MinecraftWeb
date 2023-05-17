@@ -9,13 +9,13 @@ export const index_routes = {
     home:{
         path: "/",
         name: "home",
-        component: index,
+        redirect:'/index',
         meta: { requiresAuth: true }
     },
     dashboard:{
         path: "/",
         name: "dashboard",
-        component: index,
+        redirect:'/index',
         meta: { requiresAuth: true }
     }
 }

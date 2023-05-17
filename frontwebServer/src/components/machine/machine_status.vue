@@ -1,11 +1,11 @@
 <template>
     <div class="machine-status">
         <div class="machine-status-title">
-            <div class="machine-status-title-text font-125">
+            <div class="machine-status-title-text" :style="{fontSize: fontsize}">
                 {{title}}
             </div>
-            <div class="machine-status-title-using font-125">
-                qweqwe
+            <div class="machine-status-title-using" :style="{fontSize: fontsize}">
+                {{using}}
             </div>
         </div>
         <div class="machine-status-chart" :style="{borderColor:chart_color,width:width,height:height}" ref="chart_dom">
@@ -37,7 +37,8 @@ export interface MachineStatusApi{
     width?: string
     height?: string
     title?:string
-
+    using?:string
+    fontsize?:string
 }
 
 const {alert} = useStore()
@@ -50,15 +51,17 @@ const props = withDefaults(defineProps<MachineStatusApi>(), {
     width: '300px',
     height: '200px',
     title:'Unknow',
+    using:'Unknow',
+    fontsize:'1rem'
 })
-let { chart_color,split_size,title,width,height } = toRefs(props)
+let { chart_color,split_size,title,using,width,height } = toRefs(props)
 let data:Ref<Array<number>> = ref([])
 let x_data:Ref<Array<string>> = ref([])
 let chart_dom:Ref<any> = ref(null)
 
 const init_data = async ():Promise<void>=>{
     for(let index = 0; index < split_size.value; index++) {
-    x_data.value.push('')
+        x_data.value.push('')
     }
     for(let index = 0; index < split_size.value; index++) {
         data.value.push(0)
@@ -103,7 +106,7 @@ let option:ComputedRef<any> = computed(()=>{
             {
                 data: data.value,
                 type: 'line',
-                symbolSize: 0, 
+                symbolSize: 0, //线上每个节点大小
                 lineStyle: {
                     normal: {
                         width: 1,
@@ -114,7 +117,8 @@ let option:ComputedRef<any> = computed(()=>{
                     color:chart_color.value,
                     opacity: 0.5 // 修改透明度
                 },
-                animation: false // 关闭渲染动画
+                animation: false, // 关闭渲染动画
+                emphasis: {}//关闭选中效果
             }
         ],
     }

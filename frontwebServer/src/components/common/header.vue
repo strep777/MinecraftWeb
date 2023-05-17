@@ -1,36 +1,38 @@
 <template>
   <div class="header">
-    <div class="header-title">
-      <div class="header-logo">
-        <img :src="logo" alt="" class="logo">
-      </div>
-      <div class="header-title-text font-150">
-        MC服务器管理
-      </div>
-      <div class="header-router">
-        <div class="header-router-item font-125" v-for="route_item in navbar_router" @mouseup="router.push({name:route_item.name})">
-          <div class="header-router-item-icon">
-            <i :class="route_item.icon"></i>
-          </div>
-          <div class="header-router-item-text">
-            {{ route_item.title }}
+    <div class="header-frame container">
+      <div class="header-title">
+        <div class="header-logo">
+          <img :src="logo" alt="" class="logo">
+        </div>
+        <div class="header-title-text font-150">
+          MC服务器管理
+        </div>
+        <div class="header-router">
+          <div class="header-router-item font-125" v-for="route_item in navbar_router" @mouseup="router.push({name:route_item.name})">
+            <div class="header-router-item-icon">
+              <i :class="route_item.icon"></i>
+            </div>
+            <div class="header-router-item-text">
+              {{ route_item.title }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="header-extra">
-      <div class="header-extra-item">
-        <n-popover trigger="hover" placement="bottom">
-          <template #trigger>
-            <n-button quaternary>打赏&nbsp;<i class="ri-qr-code-line"></i></n-button>
-          </template>
-          <div>
-            QR
-          </div>
-        </n-popover>
-      </div>
-      <div class="header-extra-item">
-        v1.0.0
+      <div class="header-extra">
+        <div class="header-extra-item">
+          <n-popover trigger="hover" placement="bottom">
+            <template #trigger>
+              <n-button quaternary>打赏&nbsp;<i class="ri-qr-code-line"></i></n-button>
+            </template>
+            <div>
+              QR
+            </div>
+          </n-popover>
+        </div>
+        <div class="header-extra-item font-gray">
+          1.0.0
+        </div>
       </div>
     </div>
   </div>
@@ -85,11 +87,12 @@ const navbar_router:Array<NavbarRouter> = [
   height: $size;
 }
 .header{
+  box-shadow: 0px 0px 5px 0px rgba($color: #000000, $alpha: 0.1);
+}
+.header-frame{
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  padding: 10px;
-  box-shadow: 0px 0px 5px 0px rgba($color: #000000, $alpha: 0.1);
 }
 .header-title{
   display: flex;

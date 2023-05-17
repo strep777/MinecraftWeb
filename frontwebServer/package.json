@@ -25,6 +25,7 @@
     "graphql": "^16.6.0",
     "graphql-request": "^5.2.0",
     "graphql-tag": "^2.12.6",
+    "highlight": "^0.2.4",
     "highlight.js": "^11.8.0",
     "html2canvas": "^1.4.1",
     "js-base64": "^3.7.5",
